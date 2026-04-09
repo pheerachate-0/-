@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA Redirects: Ensures that all paths are handled by index.html for React Router/SPA behavior
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "upgrade-insecure-requests"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # X-Frame-Options = "DENY" 
+    # หมายเหตุ: หากเปิดใช้งาน X-Frame-Options = "DENY" จะทำให้ไม่สามารถดู Preview ใน AI Studio ได้
+    # แนะนำให้เปิดใช้งานเมื่อ Deploy ขึ้น Production จริงแล้วเท่านั้น
